@@ -1,0 +1,4 @@
+# ignore the data directory
+data/
+# ignore pycache
+__pycache__/
