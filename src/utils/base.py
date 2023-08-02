@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.linalg import eigh
 
-def mean_square_elements(matrix):
+def mean_square_singular_values(matrix):
     """
     Calculate the mean square of the elements in the input matrix.
 
@@ -46,7 +46,7 @@ def canonical_angle(X, Y):
     similarity: float
         Similarity of X, Y.
     """
-    return mean_square_elements(Y @ X.T)
+    return mean_square_singular_values(Y @ X.T)
 
 def canonical_angle_matrix(X, Y):
     """
@@ -266,7 +266,7 @@ def cross_similarities(refs, inputs):
     for _input in inputs:
         sim = []
         for ref in refs:
-            sim.append(mean_square_elements(ref.T @ _input))
+            sim.append(mean_square_singular_values(ref.T @ _input))
         similarities.append(sim)
 
     similarities = np.array(similarities)
