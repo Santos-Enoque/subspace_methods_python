@@ -4,6 +4,7 @@ Subspace Method Interface
 
 # Authors: Junki Ishikawa
 import itertools
+from tqdm import tqdm as track
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.model_selection import KFold, StratifiedKFold
 from sklearn.preprocessing import normalize as _normalize, LabelEncoder
@@ -109,7 +110,7 @@ class SMBase(BaseEstimator, ClassifierMixin):
         X: list of 2d-arrays, (n_classes, n_dims, n_samples)
         y: array, (n_classes)
         """
-
+        breakpoint()
         dic = [subspace_bases(_X, self.n_subdims) for _X in X]
         # dic,  (n_classes, n_dims, n_subdims)
         dic = np.array(dic)
@@ -206,7 +207,7 @@ class KernelSMBase(SMBase):
         y: array, (n_classes)
         """
         coeff = []
-        for _X in X:
+        for _X in track(X):
             K = rbf_kernel(_X, _X, self.sigma)
             _coeff, _ = dual_vectors(K, self.n_subdims)
             coeff.append(_coeff)
