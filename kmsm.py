@@ -34,8 +34,10 @@ def load_and_process_data(file_path):
 
     # Flatten image dimensions and split the data
     flattened_data = data.reshape(24*24, 60, 7, 30, 100)
-    train_data = flattened_data[:, :, :, :, :80]
-    test_data = flattened_data[:, :, :, :, 80:]
+    # train_data = flattened_data[:, :, :, :, :80]
+    # test_data = flattened_data[:, :, :, :, 80:]
+    train_data = flattened_data[:, :, :, :, :8]  # first 8% for training
+    test_data = flattened_data[:, :, :, :, 8:10] # subsequent 2% for testing
 
     # Reorder dimensions: classes, images/camera, cameras, participants, image_data
     train_data = train_data.transpose(3, 1, 2, 4, 0)
