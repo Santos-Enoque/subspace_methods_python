@@ -1,4 +1,3 @@
-import numpy as np
 from sklearn.datasets import load_iris
 from src.models import KernelMSM
 from src.utils.data_transformer import DataTransformer
