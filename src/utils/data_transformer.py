@@ -7,6 +7,8 @@ class DataTransformer:
         self.y = y
         self.test_size = test_size
         self.random_state = random_state
+        # numver of features
+        self.n_of_features = X.shape[-1]
         self.n_of_sets = n_of_sets
         self.X_train, self.X_test, self.y_train, self.y_test = self._split_data()
 
@@ -15,12 +17,12 @@ class DataTransformer:
         n_of_classes = len(np.unique(self.y_train))
         X_train_grouped = np.array([self.X_train[self.y_train == i] for i in range(n_of_classes)])
         X_test_grouped = np.array([self.X_test[self.y_test == i] for i in range(n_of_classes)])
-        X_test_grouped = X_test_grouped.reshape(3, self.n_of_sets, -1, 4)
+        X_test_grouped = X_test_grouped.reshape(n_of_classes, self.n_of_sets, -1, self.n_of_features)
 
         # Reshape and prepare labels for grouped data
         train_X = X_train_grouped
         train_y = np.arange(len(X_train_grouped))
-        test_X = X_test_grouped.reshape(-1, X_test_grouped.shape[-2], X_test_grouped.shape[-1])
+        test_X = X_test_grouped.reshape(-1, X_test_grouped.shape[-2], self.n_of_features)
         test_y = np.array([[i] * self.n_of_sets for i in range(n_of_classes)]).flatten()
 
         return train_X, train_y, test_X, test_y
