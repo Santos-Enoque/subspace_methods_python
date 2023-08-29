@@ -1,2 +1,2 @@
-from .msm import MutualSubspaceMethod
+from .msm import MutualSubspaceMethod, rffMSM
 from .kmsm import KernelMSM
