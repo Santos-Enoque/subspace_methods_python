@@ -1,0 +1,12 @@
+name: my_environment
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.8
+  - numpy
+  - matplotlib
+#  - cpuonly  # remove this if you want CUDA support
+  - pytorch
+  - torchvision
+  - torchaudio
